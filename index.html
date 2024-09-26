@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control y Procedimientos</title>
+    <style>
+        body {
+            font-family: 'Century Gothic', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #logo {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-align: left;
+            flex-grow: 1;
+            word-wrap: break-word;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .button {
+            padding: 15px;
+            font-size: 1.2em;
+            color: white;
+            background-color: navy;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: lightblue;
+        }
+        .images-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .return-button {
+            display: none;
+            position: absolute;
+            top: 105px; /* Ajuste para bajar el botón */
+            right: 20px;
+            padding: 10px;
+            font-size: 1em;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .return-button:hover {
+            background-color: darkred;
+        }
+
+        /* Estilos Responsivos */
+        @media (max-width: 768px) {
+            #header {
+                flex-direction: row;
+            }
+            #logo {
+                width: 80px;
+            }
+            h1 {
+                font-size: 2em;
+                margin-left: 10px;
+            }
+            .return-button {
+                right: 10px;
+                top: 160px; /* Ajuste para pantallas móviles */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            #logo {
+                width: 60px;
+            }
+            .button {
+                font-size: 1em;
+            }
+            #searchBar {
+                padding: 8px;
+            }
+            .return-button {
+                top: 180px; /* Ajuste para móviles pequeños */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="logomc.jpeg" alt="Logo" id="logo">
+        <h1>CONTROL Y PROCEDIMIENTOS CUENTAS DE ESTADOS FINANCIEROS DEL PUNTO DE VISTA FISCAL</h1>
+    </div>
+
+    <input type="text" id="searchBar" placeholder="Buscar...">
+
+    <div id="initial-section" class="button-container">
+        <button class="button" onclick="mostrarImagenes(1)">1</button>
+        <button class="button" onclick="mostrarImagenes(2)">2</button>
+        <button class="button" onclick="mostrarImagenes(3)">3</button>
+        <button class="button" onclick="mostrarImagenes(4)">4</button>
+        <button class="button" onclick="mostrarImagenes(5)">5</button>
+        <button class="button" onclick="mostrarImagenes(6)">6</button>
+        <button class="button" onclick="mostrarImagenes(7)">7</button>
+        <button class="button" onclick="mostrarImagenes(8)">8</button>
+        <button class="button" onclick="mostrarImagenes(9)">9</button>
+        <button class="button" onclick="mostrarImagenes(10)">10</button>
+        <button class="button" onclick="mostrarImagenes(11)">11</button>
+        <button class="button" onclick="mostrarImagenes(12)">12</button>
+        <button class="button" onclick="mostrarImagenes(13)">13</button>
+        <button class="button" onclick="mostrarImagenes(14)">14</button>
+        <button class="button" onclick="mostrarImagenes(15)">15</button>
+        <button class="button" onclick="mostrarImagenes(16)">16</button>
+        <button class="button" onclick="mostrarImagenes(17)">17</button>
+        <button class="button" onclick="mostrarImagenes(18)">18</button>
+        <button class="button" onclick="mostrarImagenes(19)">19</button>
+        <button class="button" onclick="mostrarImagenes(20)">20</button>
+        <!-- Agrega más botones según sea necesario -->
+    </div>
+
+    <div class="images-container" id="imagesContainer">
+        <div id="imageHolder"></div> <!-- Contenedor para las imágenes -->
+    </div>
+
+    <button class="return-button" id="returnButton" onclick="regresarPaginaPrincipal()">Regresar</button>
+
+    <script>
+        const buttonImages = {
+            1: ["1.jpeg", "2.jpeg", "3.jpeg"],
+            2: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1B", "https://via.placeholder.com/1920x1080.png?text=Imagen+2B"],
+            3: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1C"],
+            4: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1D", "https://via.placeholder.com/1920x1080.png?text=Imagen+2D"],
+            5: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1E", "https://via.placeholder.com/1920x1080.png?text=Imagen+2E", "https://via.placeholder.com/1920x1080.png?text=Imagen+3E"],
+            6: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1F"],
+            7: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1G", "https://via.placeholder.com/1920x1080.png?text=Imagen+2G"],
+            8: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1H", "https://via.placeholder.com/1920x1080.png?text=Imagen+2H", "https://via.placeholder.com/1920x1080.png?text=Imagen+3H"],
+            9: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1I"],
+            10: ["1.jpeg", "2.jpeg"],
+            11: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1K"],
+            12: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1L", "https://via.placeholder.com/1920x1080.png?text=Imagen+2L"],
+            13: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1M", "https://via.placeholder.com/1920x1080.png?text=Imagen+2M"],
+            14: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1N"],
+            15: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1O", "https://via.placeholder.com/1920x1080.png?text=Imagen+2O"],
+            16: ["1.jpeg"],
+            17: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1Q", "https://via.placeholder.com/1920x1080.png?text=Imagen+2Q"],
+            18: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1R"],
+            19: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1S", "https://via.placeholder.com/1920x1080.png?text=Imagen+2S"],
+            20: ["https://via.placeholder.com/1920x1080.png?text=Imagen+1T"]
+        };
+        
+
+        function mostrarImagenes(buttonNumber) {
+            const imagesContainer = document.getElementById('imagesContainer');
+            const imageHolder = document.getElementById('imageHolder');
+            const returnButton = document.getElementById('returnButton');
+            const buttonContainer = document.getElementById('initial-section');
+            const searchBar = document.getElementById('searchBar');
+
+            buttonContainer.style.display = 'none';
+            searchBar.style.display = 'none';
+
+            imageHolder.innerHTML = '';
+
+            const images = buttonImages[buttonNumber];
+            images.forEach(image => {
+                const img = document.createElement('img');
+                img.src = image;
+                imageHolder.appendChild(img);
+            });
+
+            imagesContainer.style.display = 'flex';
+            returnButton.style.display = 'block';
+        }
+
+        function regresarPaginaPrincipal() {
+            const buttonContainer = document.getElementById('initial-section');
+            const imagesContainer = document.getElementById('imagesContainer');
+            const returnButton = document.getElementById('returnButton');
+            const searchBar = document.getElementById('searchBar');
+
+            buttonContainer.style.display = 'flex';
+            imagesContainer.style.display = 'none';
+            returnButton.style.display = 'none';
+            searchBar.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
